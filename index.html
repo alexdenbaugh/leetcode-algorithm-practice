@@ -7,27 +7,58 @@
     <script defer src="main.js"></script>
 </head>
 <body>
-    <h1>Leet Code Practice</h1>
-    <h3 class="date">1/17/2024 - Merged Sorted Array</h3>
-    <a href="https://leetcode.com/problems/merge-sorted-array/description/?envType=study-plan-v2&envId=top-interview-150">88. Merge Sorted Array</a>
-    <p>You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+    <div>
+        <h1>Leet Code Practice</h1>
+        <h3 class="date">1/17/2024 - Merged Sorted Array</h3>
+        <a href="https://leetcode.com/problems/merge-sorted-array/description/?envType=study-plan-v2&envId=top-interview-150">88. Merge Sorted Array</a>
+        <p>You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+    
+            Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+            
+            The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.</p>
+        <pre><code>
+            function merge(nums1: number[], m: number, nums2: number[], n: number): void {
+                nums1.splice(m, n, ...nums2)
+                nums1.sort((a,b) => {
+                    if (a < b) {
+                        return -1
+                    } else if (a > b) {
+                        return 1
+                    } else {
+                        return 0
+                    }
+                })
+            };
+        </code></pre>
+    </div>
+    <div>
+        <h3 class="date">1/25/2024 - Remove Element</h3>
+        <a href="https://leetcode.com/problems/merge-sorted-array/description/?envType=study-plan-v2&envId=top-interview-150">27. Remove Element</a>
+        <p>
+            Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
 
-        Merge nums1 and nums2 into a single array sorted in non-decreasing order.
-        
-        The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.</p>
-    <pre><code>
-        function merge(nums1: number[], m: number, nums2: number[], n: number): void {
-            nums1.splice(m, n, ...nums2)
-            nums1.sort((a,b) => {
-                if (a < b) {
-                    return -1
-                } else if (a > b) {
-                    return 1
-                } else {
-                    return 0
+            Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
+            
+            Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are not important as well as the size of nums.
+            Return k.
+        </p>
+        <pre><code>
+            function removeElement(nums: number[], val: number): number {
+                let k: number = nums.length;
+                for (let i: number = 0; i < nums.length; i++) {
+                    if (nums[i] === val) {
+                        nums.splice(i, 1)
+                        nums.push(-1)
+                        k--;
+                        i--;
+                    }
+                    if (nums[i] === -1) {
+                        return k
+                    }
                 }
-            })
-        };
-    </code></pre>
+                return k
+            };
+        </code></pre>
+    </div>
 </body>
 </html>

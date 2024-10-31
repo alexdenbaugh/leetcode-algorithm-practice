@@ -49,7 +49,6 @@ function merge(nums1, m, nums2, n) {
         }
     });
 }
-;
 // 1/25/24 - 27. Remove Element
 // Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
 // Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
@@ -98,8 +97,7 @@ function removeElement(nums, val) {
     }
     return k;
 }
-;
-console.log(removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2));
+// console.log(removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2));
 
 // 52. N-Queens II
 // Difficulty: Hard
@@ -118,6 +116,63 @@ console.log(removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2));
 
 // 1 <= n <= 9
 
+
+// Next Steps:
+// - fill squareOnLine with squares
+// - Add a function to check if a square is occupied by a queen
 var totalNQueens = function(n) {
-    
+    // x0, y0 is bottom left corner
+    if (n === 1) return 1;
+
+    let solutions = null;
+    let board = {
+        rows: [],
+        cols: [],
+        diags: [],
+        antiDiags: [],
+        queenPositions: []
+    }
+
+    for (let i = 0; i < n; i++) {
+        let row = {
+            line: {
+                y: i
+            },
+            squaresOnLine: []
+        }
+        let col = {
+            line: {
+                x: i
+            },
+            squaresOnLine: []
+        }
+        board.rows.push(row);
+        board.cols.push(col);
+    }
+
+    for (let i = -n + 1; i < n; i++) {
+        let diag = {
+            line: {
+                slope: 1,
+                yIntercept: i
+            },
+            squaresOnLine: []
+        }
+        let antiDiag = {
+            line: {
+                slope: -1,
+                yIntercept: i + n
+            },
+            squaresOnLine: []
+        }
+        board.diags.push(diag);
+        board.antiDiags.push(antiDiag);
+    }
+
+    console.log(`n = ${n}`, board);
+    return solutions;
 };
+
+for (let i = 1; i <= 9; i++) {
+    totalNQueens(i);
+}
